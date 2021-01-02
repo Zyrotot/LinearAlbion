@@ -11,7 +11,7 @@ Materials = {"Cloth" : 376,
 
 #--------------------------------------------------------------------
 
-from pulp import *
+from pulp import LpProblem, LpVariable, LpMaximize, LpInteger, value, PULP_CBC_CMD
 from data import *
 import math
 
