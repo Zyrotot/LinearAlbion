@@ -126,7 +126,7 @@ if Type == "A":
         print(t,"journals filled:", math.floor(fameTree[t]/JournalFame[Tier]))
 
 else:
-    print("Total journals filled = ", math.floor(totalFame/JournalFame[Tier]))
+    print(treeType[Type], "journals filled = ", math.floor(totalFame/JournalFame[Tier]))
 print(focusMessage[Focus])
 print("\n")
 print("Materials leftover")

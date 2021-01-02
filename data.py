@@ -10,6 +10,10 @@ FameGenerated = {"4": {"2Hweapon":720, "1Hweapon":540, "BigArmor":360, "SmallArm
                  "7": {"2Hweapon":20640, "1Hweapon":15480, "BigArmor":10320, "SmallArmor":5160},
                  "8": {"2Hweapon":44640, "1Hweapon":33480, "BigArmor":22320, "SmallArmor":11160}}
 
+treeType = {"B" : "Blacksmith",
+            "I" : "Imbuer",
+            "F" : "Fletcher"}
+
 itemType = {"BattleAxe" : "1Hweapon",
              "Halberd" : "2Hweapon",
              "Great_Axe" : "2Hweapon",
