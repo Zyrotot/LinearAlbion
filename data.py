@@ -44,7 +44,7 @@ itemType = {"BattleAxe" : "1Hweapon",
              "Pike" : "2Hweapon",
              "Glaive" : "2Hweapon",
              "Jacket" : "BigArmor",
-             "Boots" : "SmallArmor",
+             "Shoes" : "SmallArmor",
              "Hood" : "SmallArmor"}
 
 itemTree = {"BattleAxe" : "Blacksmith",
@@ -81,7 +81,7 @@ itemTree = {"BattleAxe" : "Blacksmith",
              "Pike" : "Fletcher",
              "Glaive" : "Fletcher",
              "Jacket" : "Fletcher",
-             "Boots" : "Fletcher",
+             "Shoes" : "Fletcher",
              "Hood" : "Fletcher"}
 
 clothCost = {"BattleAxe" : 0,
@@ -118,7 +118,7 @@ clothCost = {"BattleAxe" : 0,
              "Pike" : 0,
              "Glaive" : 0,
              "Jacket" : 0,
-             "Boots" : 0,
+             "Shoes" : 0,
              "Hood" : 0}
 
 metalCost = {"BattleAxe" : 16,
@@ -155,7 +155,7 @@ metalCost = {"BattleAxe" : 16,
              "Pike" : 12,
              "Glaive" : 20,
              "Jacket" : 0,
-             "Boots" : 0,
+             "Shoes" : 0,
              "Hood" : 0}
 
 woodCost = {"BattleAxe" : 8,
@@ -192,7 +192,7 @@ woodCost = {"BattleAxe" : 8,
              "Pike" : 20,
              "Glaive" : 12,
              "Jacket" : 0,
-             "Boots" : 0,
+             "Shoes" : 0,
              "Hood" : 0}
 
 leatherCost = {"BattleAxe" : 0,
@@ -229,7 +229,7 @@ leatherCost = {"BattleAxe" : 0,
                "Pike" : 0,
                "Glaive" : 0,
                "Jacket" : 16,
-               "Boots" : 8,
+               "Shoes" : 8,
                "Hood" : 8}
 
 craftedItems = {"BattleAxe" : 0,
@@ -266,7 +266,7 @@ craftedItems = {"BattleAxe" : 0,
                 "Pike" : 0,
                 "Glaive" : 0,
                 "Jacket" : 0,
-                "Boots" : 0,
+                "Shoes" : 0,
                 "Hood" : 0}
 
 RRR = {"N" : 0.248,

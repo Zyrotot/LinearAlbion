@@ -2,12 +2,12 @@ Tier = "5" # 4/5/6/7/8
 
 Focus = "N" # Y/N
 
-Type = "A" # Blacksmith/Imbuer/Fletcher/All
+Type = "B" # Blacksmith/Imbuer/Fletcher/All
 
-Materials = {"Cloth" : 1248,
-             "Metal" : 1806,
-             "Wood" : 609,
-             "Leather": 300}
+Materials = {"Cloth" : 376,
+             "Metal" : 135,
+             "Wood" : 40,
+             "Leather": 0}
 
 #--------------------------------------------------------------------
 
@@ -56,7 +56,7 @@ SP = LpVariable("1H_Spear",0,None,LpInteger)
 PI = LpVariable("Pike",0,None,LpInteger)
 GL = LpVariable("Glaive",0,None,LpInteger)
 JA = LpVariable("Jacket",0,None,LpInteger)
-BO = LpVariable("Boots",0,None,LpInteger)
+SO = LpVariable("Shoes",0,None,LpInteger)
 HO = LpVariable("Hood",0,None,LpInteger)
 
 clothUse = {"B" : 12*(HH + HM) + 8*MA,
@@ -77,12 +77,12 @@ woodUse = {"B" : 20*(HA + HC) + 16*CR + 12*GA + 8*BA + 4*SH,
 leatherUse = {"B" : 12*HSW + 8*SW,
               "I" : 4*ST,
               "F" : 20*(CL + SF) + 16*(HDA + JA) + 12*DA + 8*(BO + HO),
-              "A" : 20*(CL + SF) + 16*(HDA + JA) + 12*(DA + HSW) + 8*(SW + BO + HO) + 4*ST}
+              "A" : 20*(CL + SF) + 16*(HDA + JA) + 12*(DA + HSW) + 8*(SW + SO + HO) + 4*ST}
 
 typeFame = {"B" : FameGenerated[Tier]["2Hweapon"]*(HA + GA + HC + HH + HM + HSW) + FameGenerated[Tier]["1Hweapon"]*(BA + CR + HR + MA + SW) + FameGenerated[Tier]["BigArmor"]*AR + FameGenerated[Tier]["SmallArmor"]*(BO + SH + HE),
             "I" : FameGenerated[Tier]["2Hweapon"]*(HD + HHO) + FameGenerated[Tier]["1Hweapon"]*(DS + HS) + FameGenerated[Tier]["BigArmor"]*RO + FameGenerated[Tier]["SmallArmor"]*(SA + CO + ST),
-            "F" : FameGenerated[Tier]["2Hweapon"]*(HN + HDA + CL + SF + PI + GL) + FameGenerated[Tier]["1Hweapon"]*(NS + DA + SP) + FameGenerated[Tier]["BigArmor"]*JA + FameGenerated[Tier]["SmallArmor"]*(TO + BO + HO),
-            "A" : FameGenerated[Tier]["2Hweapon"]*(HA + GA + HC + HH + HM + HSW + HD + HHO + HN + HDA + CL + SF + PI + GL) + FameGenerated[Tier]["1Hweapon"]*(BA + CR + HR + MA + SW + DS + HS + NS + DA + SP) + FameGenerated[Tier]["BigArmor"]*(AR + RO + JA) + FameGenerated[Tier]["SmallArmor"]*(BO + SH + HE + SA + CO + ST + TO + BO + HO)}
+            "F" : FameGenerated[Tier]["2Hweapon"]*(HN + HDA + CL + SF + PI + GL) + FameGenerated[Tier]["1Hweapon"]*(NS + DA + SP) + FameGenerated[Tier]["BigArmor"]*JA + FameGenerated[Tier]["SmallArmor"]*(TO + SO + HO),
+            "A" : FameGenerated[Tier]["2Hweapon"]*(HA + GA + HC + HH + HM + HSW + HD + HHO + HN + HDA + CL + SF + PI + GL) + FameGenerated[Tier]["1Hweapon"]*(BA + CR + HR + MA + SW + DS + HS + NS + DA + SP) + FameGenerated[Tier]["BigArmor"]*(AR + RO + JA) + FameGenerated[Tier]["SmallArmor"]*(BO + SH + HE + SA + CO + ST + TO + SO + HO)}
 
 prob += typeFame[Type], "totalFame"
 
