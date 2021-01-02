@@ -76,7 +76,7 @@ woodUse = {"B" : 20*(HA + HC) + 16*CR + 12*GA + 8*BA + 4*SH,
 
 leatherUse = {"B" : 12*HSW + 8*SW,
               "I" : 4*ST,
-              "F" : 20*(CL + SF) + 16*(HDA + JA) + 12*DA + 8*(BO + HO),
+              "F" : 20*(CL + SF) + 16*(HDA + JA) + 12*DA + 8*(SO + HO),
               "A" : 20*(CL + SF) + 16*(HDA + JA) + 12*(DA + HSW) + 8*(SW + SO + HO) + 4*ST}
 
 typeFame = {"B" : FameGenerated[Tier]["2Hweapon"]*(HA + GA + HC + HH + HM + HSW) + FameGenerated[Tier]["1Hweapon"]*(BA + CR + HR + MA + SW) + FameGenerated[Tier]["BigArmor"]*AR + FameGenerated[Tier]["SmallArmor"]*(BO + SH + HE),
