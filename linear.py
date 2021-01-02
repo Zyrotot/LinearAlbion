@@ -2,14 +2,14 @@ Tier = "5" # 4/5/6/7/8
 
 Focus = "N" # Y/N
 
-Type = "F" # Blacksmith/Imbuer/Fletcher
+Type = "A" # Blacksmith/Imbuer/Fletcher/All
 
 Materials = {"Cloth" : 1248,
              "Metal" : 1806,
              "Wood" : 609,
              "Leather": 300}
 
-#------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------
 
 from pulp import *
 from data import *
@@ -34,7 +34,7 @@ HE = LpVariable("Helmet",0,None,LpInteger)
 MA = LpVariable("1H_Mace",0,None,LpInteger)
 HM = LpVariable("2H_Mace",0,None,LpInteger)
 SW = LpVariable("1H_Sword",0,None,LpInteger)
-HS = LpVariable("2H_Sword",0,None,LpInteger)
+HSW = LpVariable("2H_Sword",0,None,LpInteger)
 
 RO = LpVariable("Robe",0,None,LpInteger)
 SA = LpVariable("Sandals",0,None,LpInteger)
@@ -61,23 +61,28 @@ HO = LpVariable("Hood",0,None,LpInteger)
 
 clothUse = {"B" : 12*(HH + HM) + 8*MA,
             "I" : 16*RO + 12*HHO + 8*(SA + CO + HS) + 4*ST,
-            "F" : 12*HN + 8*NS + 4*TO}
+            "F" : 12*HN + 8*NS + 4*TO,
+            "A" : 16*RO + 12*(HH + HM + HN + HHO) + 8*(MA + SA + CO + HS + NS) + 4*(ST + TO)}
 
-metalUse = {"B" : 24*HR + 20*(GA + HH + HM + HS) + 16*(BA + AR + MA + SW) + 12*(HA + HC) + 8*(BO + CR + HE) + 4*SH,
+metalUse = {"B" : 24*HR + 20*(GA + HH + HM + HSW) + 16*(BA + AR + MA + SW) + 12*(HA + HC) + 8*(BO + CR + HE) + 4*SH,
             "I" : 12*HD + 8*DS,
-            "F" : 20*GL + 16*HDA + 12*(DA + CL + SF + PI) + 8*SP}
+            "F" : 20*GL + 16*HDA + 12*(DA + CL + SF + PI) + 8*SP,
+            "A" : 24*HR + 20*(GL + GA + HH + HM + HSW) + 16*(BA + AR + MA + SW + HDA) + 12*(HA + HC + HD + DA + CL + SF + PI) + 8*(BO + CR + HE + DS + SP) + 4*SH}
 
 woodUse = {"B" : 20*(HA + HC) + 16*CR + 12*GA + 8*BA + 4*SH,
            "I" : 20*(HD + HHO) + 16*(DS + HS),
-           "F" : 20*(HN + PI) + 16*(NS + SP) + 12*GL + 4*TO}
+           "F" : 20*(HN + PI) + 16*(NS + SP) + 12*GL + 4*TO,
+           "A" : 20*(HA + HC + HD + HHO + HN + PI) + 16*(CR + DS + HS + NS + SP) + 12*(GA + GL) + 8*BA + 4*(TO + SH)}
 
-leatherUse = {"B" : 8*SW + 12*HS,
+leatherUse = {"B" : 12*HSW + 8*SW,
               "I" : 4*ST,
-              "F" : 20*(CL + SF) + 16*(HDA + JA) + 12*DA + 8*(BO + HO)}
+              "F" : 20*(CL + SF) + 16*(HDA + JA) + 12*DA + 8*(BO + HO),
+              "A" : 20*(CL + SF) + 16*(HDA + JA) + 12*(DA + HSW) + 8*(SW + BO + HO) + 4*ST}
 
-typeFame = {"B" : FameGenerated[Tier]["2Hweapon"]*(HA + GA + HC + HH + HM) + FameGenerated[Tier]["1Hweapon"]*(BA + CR + HR + MA) + FameGenerated[Tier]["BigArmor"]*AR + FameGenerated[Tier]["SmallArmor"]*(BO + SH + HE),
+typeFame = {"B" : FameGenerated[Tier]["2Hweapon"]*(HA + GA + HC + HH + HM + HSW) + FameGenerated[Tier]["1Hweapon"]*(BA + CR + HR + MA + SW) + FameGenerated[Tier]["BigArmor"]*AR + FameGenerated[Tier]["SmallArmor"]*(BO + SH + HE),
             "I" : FameGenerated[Tier]["2Hweapon"]*(HD + HHO) + FameGenerated[Tier]["1Hweapon"]*(DS + HS) + FameGenerated[Tier]["BigArmor"]*RO + FameGenerated[Tier]["SmallArmor"]*(SA + CO + ST),
-            "F" : FameGenerated[Tier]["2Hweapon"]*(HN + HDA + CL + SF + PI + GL) + FameGenerated[Tier]["1Hweapon"]*(NS + DA + SP) + FameGenerated[Tier]["BigArmor"]*JA + FameGenerated[Tier]["SmallArmor"]*(TO + BO + HO)}
+            "F" : FameGenerated[Tier]["2Hweapon"]*(HN + HDA + CL + SF + PI + GL) + FameGenerated[Tier]["1Hweapon"]*(NS + DA + SP) + FameGenerated[Tier]["BigArmor"]*JA + FameGenerated[Tier]["SmallArmor"]*(TO + BO + HO),
+            "A" : FameGenerated[Tier]["2Hweapon"]*(HA + GA + HC + HH + HM + HSW + HD + HHO + HN + HDA + CL + SF + PI + GL) + FameGenerated[Tier]["1Hweapon"]*(BA + CR + HR + MA + SW + DS + HS + NS + DA + SP) + FameGenerated[Tier]["BigArmor"]*(AR + RO + JA) + FameGenerated[Tier]["SmallArmor"]*(BO + SH + HE + SA + CO + ST + TO + BO + HO)}
 
 prob += typeFame[Type], "totalFame"
 
@@ -108,7 +113,20 @@ while generatedFame > 0:
         generatedFame = 0
 
 print("Total fame generated = ", totalFame)
-print("Total journals filled = ", math.floor(totalFame/JournalFame[Tier]))
+if Type == "A":
+    fameTree = {"Imbuer" : 0,
+                "Blacksmith" : 0,
+                "Fletcher" : 0}
+
+    for v in craftedItems:
+        if(craftedItems[v] != 0):
+            fameTree[itemTree[v]] += craftedItems[v]*FameGenerated[Tier][itemType[v]]
+
+    for t in fameTree:
+        print(t,"journals filled:", math.floor(fameTree[t]/JournalFame[Tier]))
+
+else:
+    print("Total journals filled = ", math.floor(totalFame/JournalFame[Tier]))
 print(focusMessage[Focus])
 print("\n")
 print("Materials leftover")
